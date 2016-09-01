@@ -1,72 +1,24 @@
 "use strict";
 
 //Two args: Name of Module, Array of Dependencies
-var app = angular.module("TodoApp", [])
-
-//Make a new controller on the App module
-//Two args: Name, Function. Inject $scope into the function
-app.controller("NavCtrl", function($scope){
-    $scope.navItems = [
-        {name: "Logout"},
-        {name: "All Items"},
-        {name: "New Items"}
-    ]
-})
-
-app.controller("TodoCtrl", function($scope) {
-
-    $scope.items = [
-      {
-        id: 0,
-        task: "mow the lawn",
-        isCompleted: false,
-        dueDate: "12/5/17",
-        assignedTo: "Greg",
-        location: "Joe's house",
-        urgency: "low",
-        dependencies: "sunshine, clippers, hat, water, headphones"
-      },
-      {
-        id: 1,
-        task: "grade quizzes",
-        isCompleted: false,
-        dueDate: "12/5/15",
-        assignedTo: "Christina",
-        location: "NSS",
-        urgency: "high",
-        dependencies: "wifi, tissues, vodka"
-      },
-      {
-        id: 2,
-        task: "take a nap",
-        isCompleted: false,
-        dueDate: "5/21/16",
-        assignedTo: "Joe",
-        location: "Porch of lakefront cabin",
-        urgency: "medium",
-        dependencies: "hammock, silence"
-      }
-    ];
+// Just like var ng-route = require("app/js/etc.js")
+var app = angular.module("TodoApp", ["ngRoute"])
 
 
-    //Handles the view
-    $scope.showListView = true
-
-    $scope.newItem = function () {
-        $scope.showListView = false;
-    }
-
-    $scope.allItem = function () {
-        $scope.showListView = true;
-    }
-
-    //Handles adding a new task item
-    $scope.newTask = {}
-    $scope.addNewItem = function () {
-        $scope.newTask.isCompleted = false;
-        $scope.newTask.id = $scope.items.length
-        $scope.items.push($scope.newTask)
-        $scope.newTask = {}
-    }
-
+// Adding to the config property of app
+// Things to do BEFORE the app runs
+app.config(function ($routeProvider) {
+    $routeProvider.
+    // Takes 2 args. Path and Object containing Template + Controller
+    // Don't need to climb out of directory for files
+    // because we're using the MODULES
+        when("/items/list", {
+            templateUrl: "partials/item-list.html",
+            controller: "ItemListCtrl"
+        }).
+        when("/items/new", {
+            templateUrl: "partials/item-form.html",
+            controller: "TodoCtrl"
+        }).
+        otherwise('/items/list')
 })
