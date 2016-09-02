@@ -20,6 +20,18 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
         })
     }
 
+    let getSingleItem = (itemId) => {
+        return $q((resolve, reject) => {
+            $http.get(`${FirebaseURL}/items/${itemId}.json`)
+            .success((itemObject) => {
+                resolve(itemObject)
+            })
+            .error((error) => {
+                reject(error)
+            })
+        })
+    }
+
     let postNewItem = (newItem) => {
         return $q( (resolve, reject) => {
             $http.post(`${FirebaseURL}/items.json`,
@@ -42,7 +54,16 @@ app.factory("ItemStorage", ($q, $http, FirebaseURL) => {
         })
     }
 
+    let editItem = (itemId, editedItem) => {
+        return $q( (resolve, reject) => {
+            $http.put(`${FirebaseURL}/items/${itemId}.json`, JSON.stringify(editedItem))
+            .success( (objFromFirebase) => {
+                resolve(objFromFirebase)
+            })
+        })
+    }
 
-    return {getItemList, postNewItem, deleteItem}
+
+    return {getItemList, postNewItem, deleteItem, editItem, getSingleItem}
 
 })
