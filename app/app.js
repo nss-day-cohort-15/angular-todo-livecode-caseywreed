@@ -3,7 +3,7 @@
 //Two args: Name of Module, Array of Dependencies
 // Just like var ng-route = require("app/js/etc.js")
 var app = angular.module("TodoApp", ["ngRoute"])
-
+.constant("FirebaseURL", "https://angular-todo-fa439.firebaseio.com/");
 
 // Adding to the config property of app
 // Things to do BEFORE the app runs
@@ -18,7 +18,11 @@ app.config(function ($routeProvider) {
         }).
         when("/items/new", {
             templateUrl: "partials/item-form.html",
-            controller: "TodoCtrl"
+            controller: "ItemNewCtrl"
+        }).
+        when("/items/view/:itemId", {
+            templateUrl: "partials/item-details.html",
+            controller: "ItemViewCtrl"
         }).
         otherwise('/items/list')
 })

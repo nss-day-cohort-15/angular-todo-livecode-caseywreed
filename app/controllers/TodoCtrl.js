@@ -1,25 +1,28 @@
-"use strict";
+// "use strict";
 
-app.controller("TodoCtrl", function($scope, $location) {
+// THIS IS NOT BEING USED ANYMORE
+// // But we're keeping it around to learn from later
 
-    //Handles the view
-    $scope.showListView = true
+// app.controller("TodoCtrl", function ($scope, $location) {
 
-    $scope.newItem = function () {
-        $location.url("/items/new")
-    }
+//     //Handles the view
+//     $scope.showListView = true
 
-    $scope.allItem = function () {
-        $location.url("/items/list")
-    }
+//     $scope.newItem = function () {
+//         $location.url("/items/new")
+//     }
 
-    //Handles adding a new task item
-    $scope.newTask = {}
-    $scope.addNewItem = function () {
-        $scope.newTask.isCompleted = false;
-        $scope.newTask.id = $scope.items.length
-        $scope.items.push($scope.newTask)
-        $scope.newTask = {}
-    }
+//     $scope.allItem = function () {
+//         $location.url("/items/list")
+//     }
 
-})
+//     //Handles adding a new task item
+//     $scope.newTask = {}
+//     $scope.addNewItem = function () {
+//         $scope.newTask.isCompleted = false;
+//         $scope.newTask.id = $scope.items.length
+//         $scope.items.push($scope.newTask)
+//         $scope.newTask = {}
+//     }
+
+// })
